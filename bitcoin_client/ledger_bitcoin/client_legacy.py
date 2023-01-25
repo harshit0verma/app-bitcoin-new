@@ -114,6 +114,10 @@ class LegacyClient(Client):
             privkey=None,
             pubkey=compress_public_key(pubkey["publicKey"]),
         )
+        
+        if(not xpub.to_string.islower()):
+            raise ValueError(f"the characters of {fingerprint} are not all lowercase")
+            
         return xpub.to_string()
 
     def register_wallet(self, wallet: WalletPolicy) -> Tuple[bytes, bytes]:
